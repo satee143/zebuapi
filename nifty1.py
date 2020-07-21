@@ -23,4 +23,4 @@ while(socket_opened==False):
     pass
 alice.subscribe(alice.get_instrument_for_fno(symbol='NIFTY', expiry_date=datetime.date(2020, 7, 30), is_fut=True,
                                                  strike=None, is_CE=False), LiveFeedType.MARKET_DATA)
-sleep(1)
+sleep(99999)
