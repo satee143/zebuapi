@@ -27,6 +27,5 @@ alice.start_websocket(subscribe_callback=event_handler_quote_update,
                       run_in_background=True)
 while (socket_opened == False):
     pass
-alice.subscribe(alice.get_instrument_for_fno(symbol='BANKNIFTY', expiry_date=datetime.date(2020, 7, 30), is_fut=True,
-                                             strike=None, is_CE=False), LiveFeedType.MARKET_DATA)
+alice.subscribe(alice.get_instrument_for_fno(symbol = 'BANKNIFTY', expiry_date=datetime.date(2020, 7, 30), is_fut=True, strike=None, is_CE = False), LiveFeedType.MARKET_DATA)
 sleep(1)
