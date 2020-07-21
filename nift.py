@@ -1,6 +1,7 @@
 import csv
 import datetime
 from time import sleep
+
 from alice_blue import *
 
 access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@9', twoFA='a',
