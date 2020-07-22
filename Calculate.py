@@ -1,18 +1,18 @@
-import pandas as pd
 import os
+
 import nsepy
-import datetime
 import openpyxl
 import pytest
 
-from datetime import timedelta  
+import datetime
+from datetime import timedelta
 
-global df,buy_list
-buy_list=[]
+global df, buy_list
+buy_list = []
 os.chdir('/storage/emulated/0/Download')
 
-def read_data():
 
+def read_data():
     wb = openpyxl.load_workbook('ab.xlsx')
     ws = wb['Sheet1']
     row = ws.max_row
@@ -21,37 +21,37 @@ def read_data():
     for i in range(1, row + 1):
         l1 = []
         stock_name = ws.cell(i, 1)
-        stock_type=ws.cell(i,2)
-        stock_price=ws.cell(i,3)
+        stock_type = ws.cell(i, 2)
+        stock_price = ws.cell(i, 3)
 
-        l1.insert(0,stock_name.value)
-        l1.insert(1,stock_type.value)
-        l1.insert(2,stock_price.value)
-        
-        l.insert(i-1,l1)
-        
+        l1.insert(0, stock_name.value)
+        l1.insert(1, stock_type.value)
+        l1.insert(2, stock_price.value)
 
-    
+        l.insert(i - 1, l1)
+
     return l
+
 
 @pytest.mark.parametrize('data', read_data())
 def test_create_chart(data):
-	date_y=datetime.date.today() - timedelta(days=2)
-	df = nsepy.get_history(symbol=data[1], start=date_y, end=datetime.date.today())
-	print(df[['Open','High','Low']])
-	if data[1]=='Buy':
-		if  df.iloc[[-1]]['High']>=data[2]:
-			print(data[2])
-			print(data[0],'Price achieved')
-			print('Day High',df.iloc[[-1]]['High'])
-			
-			
-	elif data[1]=='Sell':
-		if  df.iloc[[-1]]['Low']<=data[2]:
-			print(data[2])
-			print(data[0],'Sell Price achieved')
-			print('Day Low',df.iloc[[-1]]['Low'])
-			
+    date_y = datetime.date.today() - timedelta(days=2)
+    df = nsepy.get_history(symbol=data[1], start=date_y, end=datetime.date.today())
+    print(df[['Open', 'High', 'Low']])
+    if data[1] == 'Buy':
+        if df.iloc[[-1]]['High'] >= data[2]:
+            print(data[2])
+            print(data[0], 'Price achieved')
+            print('Day High', df.iloc[[-1]]['High'])
+
+
+    elif data[1] == 'Sell':
+        if df.iloc[[-1]]['Low'] <= data[2]:
+            print(data[2])
+            print(data[0], 'Sell Price achieved')
+            print('Day Low', df.iloc[[-1]]['Low'])
+
+
 '''		
 	buy=[]
 	if (float(df.iloc[[-1]]['Open']) >= float(df.iloc[[-1]]['High'])):

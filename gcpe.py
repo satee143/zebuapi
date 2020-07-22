@@ -1,5 +1,4 @@
-
-#!/usr/bin/env python
+# !/usr/bin/env python
 
 # Copyright 2015 Google Inc. All Rights Reserved.
 #
@@ -34,6 +33,8 @@ from six.moves import input
 def list_instances(compute, project, zone):
     result = compute.instances().list(project=project, zone=zone).execute()
     return result['items'] if 'items' in result else None
+
+
 # [END list_instances]
 
 
@@ -110,6 +111,8 @@ def create_instance(compute, project, zone, name, bucket):
         project=project,
         zone=zone,
         body=config).execute()
+
+
 # [END create_instance]
 
 
@@ -119,6 +122,8 @@ def delete_instance(compute, project, zone, name):
         project=project,
         zone=zone,
         instance=name).execute()
+
+
 # [END delete_instance]
 
 
@@ -138,6 +143,8 @@ def wait_for_operation(compute, project, zone, operation):
             return result
 
         time.sleep(1)
+
+
 # [END wait_for_operation]
 
 

@@ -1,8 +1,5 @@
-
-import pandas
-import pandas_datareader.data as web
-import datetime
 import matplotlib.pyplot as plt
+import pandas_datareader.data as web
 
 # Window length for moving average
 window_length = 14
@@ -19,7 +16,7 @@ close = data['Adj Close']
 delta = close.diff()
 # Get rid of the first row, which is NaN since it did not have a previous 
 # row to calculate the differences
-delta = delta[1:] 
+delta = delta[1:]
 
 # Make the positive gains (up) and negative gains (down) Series
 up, down = delta.copy(), delta.copy()
@@ -44,7 +41,7 @@ RSI2 = 100.0 - (100.0 / (1.0 + RS2))
 
 # Compare graphically
 plt.figure(figsize=(8, 6))
-#RSI1.plot()
+# RSI1.plot()
 RSI2.plot()
 plt.legend(['RSI via EWMA', 'RSI via SMA'])
 plt.show()

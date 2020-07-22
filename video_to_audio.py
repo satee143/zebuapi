@@ -1,5 +1,7 @@
-import moviepy.editor
 import os
+
+import moviepy.editor
+
 os.chdir('/storage/emulated/0/Download')
 # file location
 video = moviepy.editor.VideoFileClip("a.mp4")

@@ -1,14 +1,20 @@
+import os
+
 import plotly.graph_objects as go
+
 import pandas as pd
-import  os 
+
 
 def create_chart():
-	df=pd.read_csv('c.csv',names=['date','Close'],index_col=0,parse_dates=True)
-	df=df['Close'].resample('1M').ohlc()
-	df.reset_index('date',inplace=True)
-	print(df)
-	fig = go.Figure(data=[go.Candlestick(x=df['date'],open=df['open'],high=df['high'],low=df['low'],close=df['close'])])
-	fig.show()
+    df = pd.read_csv('c.csv', names=['date', 'Close'], index_col=0, parse_dates=True)
+    df = df['Close'].resample('1M').ohlc()
+    df.reset_index('date', inplace=True)
+    print(df)
+    fig = go.Figure(
+        data=[go.Candlestick(x=df['date'], open=df['open'], high=df['high'], low=df['low'], close=df['close'])])
+    fig.show()
+
+
 '''	
 def buy_sell():
     sigPriceBuy = []
@@ -41,7 +47,7 @@ def buy_sell():
             sigPriceSell.append(np.nan)
 
     return (sigPriceBuy, sigPriceSell)
-'''	
+'''
 os.chdir('/storage/emulated/0/bluetooth')
 
 create_chart()

@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
+
 session = HTMLSession()
+
 
 def get_all_forms(url):
     """Returns all form tags found on a web page's `url` """
@@ -9,9 +11,10 @@ def get_all_forms(url):
     # for javascript driven website
     # res.html.render()
     soup = BeautifulSoup(res.html.html, "html.parser")
-    print (soup.find_all('form'))
+    print(soup.find_all('form'))
     return soup.find_all("form")
-    
+
+
 def get_form_details(form):
     """Returns the HTML details of a form,
     including action, method and list of form controls (inputs, etc)"""
@@ -29,7 +32,7 @@ def get_form_details(form):
         # get name attribute
         input_name = input_tag.attrs.get("name")
         # get the default value of that input tag
-        input_value =input_tag.attrs.get("value", "")
+        input_value = input_tag.attrs.get("value", "")
         # add everything to that list
         inputs.append({"type": input_type, "name": input_name, "value": input_value})
     # put everything to the resulting dictionary
@@ -37,12 +40,13 @@ def get_form_details(form):
     details["method"] = method
     details["inputs"] = inputs
     return details
-    
+
+
 url = "https://wikipedia.org"
 # get all form tags
 forms = get_all_forms(url)
 # iteratte over forms
 for i, form in enumerate(forms, start=1):
     form_details = get_form_details(form)
-    print("="*50, f"form #{i}", "="*50)
+    print("=" * 50, f"form #{i}", "=" * 50)
     print(form_details)

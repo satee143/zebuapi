@@ -1,7 +1,7 @@
 import psycopg2
 
-con=psycopg2.connect(database='employees',user='postgres', password='0690252')
-cur=con.cursor()
+con = psycopg2.connect(database='employees', user='postgres', password='0690252')
+cur = con.cursor()
 cur.execute(
     "SELECT country,COUNT(employee_id) Strength "
     "FROM employees,regions "

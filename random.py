@@ -1,3 +1,3 @@
 import random
 
-print(type(random.randint(1,10)))
+print(type(random.randint(1, 10)))

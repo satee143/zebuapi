@@ -1,15 +1,15 @@
-#Inventory class
+# Inventory class
 
-from tkinter import*
-from tkinter import messagebox
 import sqlite3
+from tkinter import *
+from tkinter import messagebox
 
 conn = sqlite3.connect("inventory.db")
 
 c = conn.cursor()
 
-#c.execute("CREATE TABLE inventory(product text, quantity integer)")
 
+# c.execute("CREATE TABLE inventory(product text, quantity integer)")
 
 
 class inventory:
@@ -20,14 +20,14 @@ class inventory:
 
     def getName(self):
         return self.name
-   
+
     def getQuantity(self):
         return self.quantity
 
     def getInfo(self):
         print(self.name)
         print(str(self.quantity))
-        
+
     def remove(self):
         volume = self.quantity
         volume = int(volume) - 1
@@ -37,18 +37,19 @@ class inventory:
         self.quantity = str(volume)
         x = 0
         for items in items_in_store:
-            Label(top, text = "Product: " + items.getName() +  " Quantity: " + str(items.getQuantity())).destroy()
-            Button(top, text = "+", command = items.add).destroy()
-            x +=1
+            Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).destroy()
+            Button(top, text="+", command=items.add).destroy()
+            x += 1
 
         x = 0
         for items in items_in_store:
-            Label(top, text = "Product: " + items.getName() +  " Quantity: " + str(items.getQuantity())).grid(row = x,  column = 0)
-            Button(top, text = "+", command = items.add).grid(row = x, column = 1)
-            x +=1
+            Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row=x,
+                                                                                                           column=0)
+            Button(top, text="+", command=items.add).grid(row=x, column=1)
+            x += 1
             with conn:
-                c.execute("UPDATE inventory SET quantity = :quantity WHERE product = :product", {'product': items.getName(), 'quantity': items.getQuantity()})
-    
+                c.execute("UPDATE inventory SET quantity = :quantity WHERE product = :product",
+                          {'product': items.getName(), 'quantity': items.getQuantity()})
 
     def add(self):
         global top
@@ -57,17 +58,20 @@ class inventory:
         self.quantity = str(volume)
         x = 0
         for items in items_in_store:
-            Label(top, text = "Product: " + items.getName() +  " Quantity: " + str(items.getQuantity())).destroy()
-            Button(top, text = "+", command = items.add).destroy()
-            x +=1
+            Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).destroy()
+            Button(top, text="+", command=items.add).destroy()
+            x += 1
 
         x = 0
         for items in items_in_store:
-            Label(top, text = "Product: " + items.getName() +  " Quantity: " + str(items.getQuantity())).grid(row = x,  column = 0)
-            Button(top, text = "+", command = items.add).grid(row = x, column = 1)
-            x +=1
+            Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row=x,
+                                                                                                           column=0)
+            Button(top, text="+", command=items.add).grid(row=x, column=1)
+            x += 1
             with conn:
-                c.execute("UPDATE inventory SET quantity = :quantity WHERE product = :product", {'product': items.getName(), 'quantity': items.getQuantity()})
+                c.execute("UPDATE inventory SET quantity = :quantity WHERE product = :product",
+                          {'product': items.getName(), 'quantity': items.getQuantity()})
+
     def delete_product(self):
         global top
         with conn:
@@ -79,9 +83,11 @@ class inventory:
         top = Toplevel()
         x = 0
         for items in items_in_store:
-            Label(top, text = "Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row = x,  column = 0)
-            Button(top, text = "DELETE", command = items.delete_product).grid(row = x, column = 1)
-            x +=1
+            Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row=x,
+                                                                                                           column=0)
+            Button(top, text="DELETE", command=items.delete_product).grid(row=x, column=1)
+            x += 1
+
 
 def new_item():
     global top
@@ -89,40 +95,43 @@ def new_item():
     global new_quantity
     new_item_name = new.get()
     new_item_quantity = new_quantity.get()
-    response = messagebox.askquestion("Confirm", "Item name: " + new_item_name + "\nItem Quantity: " + new_item_quantity + "\nIs the information you added correct?")
-    if response =="yes":
+    response = messagebox.askquestion("Confirm",
+                                      "Item name: " + new_item_name + "\nItem Quantity: " + new_item_quantity + "\nIs the information you added correct?")
+    if response == "yes":
         item = inventory(new_item_name, new_item_quantity)
         items_in_store.append(item)
         with conn:
-            c.execute("INSERT INTO inventory VALUES (:product, :quantity)", {'product': item.getName(), 'quantity': item.getQuantity()})
+            c.execute("INSERT INTO inventory VALUES (:product, :quantity)",
+                      {'product': item.getName(), 'quantity': item.getQuantity()})
         top.destroy()
     else:
-        Label(top, text = "Please correct the information").grid(row = 4, column = 0, columnspan = 2)
-    
-    
+        Label(top, text="Please correct the information").grid(row=4, column=0, columnspan=2)
+
+
 def add_item():
     global top
     top = Toplevel()
-    Label(top, text = "Name of Item: ").grid(row = 0, column = 0)
+    Label(top, text="Name of Item: ").grid(row=0, column=0)
     global new
     new = StringVar()
-    Entry(top, textvariable = new).grid(row = 0, column = 1)
+    Entry(top, textvariable=new).grid(row=0, column=1)
     global new_quantity
     new_quantity = StringVar()
-    Label(top, text = "Quantity of Item: ").grid(row = 1, column = 0)
-    Entry(top, textvariable = new_quantity).grid(row = 1, column = 1)
-    
-    Button(top, text = "Ok", command = new_item).grid(row = 3, column = 1, columnspan = 2)
+    Label(top, text="Quantity of Item: ").grid(row=1, column=0)
+    Entry(top, textvariable=new_quantity).grid(row=1, column=1)
+
+    Button(top, text="Ok", command=new_item).grid(row=3, column=1, columnspan=2)
+
 
 def modify_inventory():
     global top
     top = Toplevel()
     x = 0
     for items in items_in_store:
-        Label(top, text = "Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row = x,  column = 0)
-        Button(top, text = "+", command = items.add).grid(row = x, column = 1)
-        Button(top, text = "-", command = items.remove).grid(row = x, column = 2)
-        x +=1
+        Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row=x, column=0)
+        Button(top, text="+", command=items.add).grid(row=x, column=1)
+        Button(top, text="-", command=items.remove).grid(row=x, column=2)
+        x += 1
 
 
 def delete_page():
@@ -130,31 +139,29 @@ def delete_page():
     top = Toplevel()
     x = 0
     for items in items_in_store:
-        Label(top, text = "Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row = x,  column = 0)
-        Button(top, text = "DELETE", command = items.delete_product).grid(row = x, column = 1)
-        x +=1
+        Label(top, text="Product: " + items.getName() + " Quantity: " + str(items.getQuantity())).grid(row=x, column=0)
+        Button(top, text="DELETE", command=items.delete_product).grid(row=x, column=1)
+        x += 1
     return
+
 
 items_in_store = []
 c.execute("SELECT * FROM inventory")
 it = list(c.fetchall())
 y = 0
 for i in it:
-
     x = inventory(i[0], i[1])
-    y +=1
+    y += 1
     items_in_store.append(x)
-
 
 root = Tk()
 root.title("Inventory")
 root.geometry("400x400")
 if len(items_in_store) == 0:
     pop = messagebox.showinfo("Welcome!", "To begin please add items to your inventory list")
-add_new_item = Button(root, text = "Add New Item", command = add_item).pack(pady= 50)
-modify = Button(root, text = "View All Inventory", command = modify_inventory ).pack(pady= 50)
-delete = Button(root, text = "Delete an Item", command = delete_page).pack(pady=50)
-
+add_new_item = Button(root, text="Add New Item", command=add_item).pack(pady=50)
+modify = Button(root, text="View All Inventory", command=modify_inventory).pack(pady=50)
+delete = Button(root, text="Delete an Item", command=delete_page).pack(pady=50)
 
 ##category = Label(root, text = "Create a category").pack()
 ##frame = LabelFrame(root, text = "Categories", padx=5, pady=5)
@@ -164,18 +171,4 @@ delete = Button(root, text = "Delete an Item", command = delete_page).pack(pady=
 
 conn.commit()
 
-
-
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-

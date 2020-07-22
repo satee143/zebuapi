@@ -1,8 +1,11 @@
 ### Importing modules ###
-import PyPDF2,pandas as pd
+import os
+
+import PyPDF2
+import pandas as pd
+
 from datetime import datetime
 
-import os
 os.chdir('/storage/emulated/0/Download')
 
 ### Opening the PDF File as PdfFileObj ###
@@ -11,9 +14,8 @@ pdfFileObj = open('/storage/emulated/0/Download/DE1511756.pdf', 'rb')
 ### Reading the PDF file using PYPDF2 module as pdfReader Object
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
-
 ### Creating list data types for storing the values in object
-invoice,date,cgst,sgst,total,amountl   = [],[],[],[],[],[]
+invoice, date, cgst, sgst, total, amountl = [], [], [], [], [], []
 
 ### Reading the Numpages in the PDF File
 numpages = pdfReader.numPages
@@ -31,7 +33,7 @@ for x in range(numpages):
     if 'Tax Invoice(Original for Recipient)' in page_text:
         ### Finding the Invoice Number Text char Location index ###
         xy = page_text.find('Invoice Number:')
-        #print(page_text[xy])
+        # print(page_text[xy])
 
         ### Finding the Invoice Number last Digit Text char Location index ###
         xyz = page_text.find('GSTIN')
@@ -79,14 +81,11 @@ ex_data = pd.DataFrame(
         'INVOICE_AMOUNT': amountl,
 
         'CGST': cgst,
-        'SGST':sgst,
+        'SGST': sgst,
         'Total_amt': total
 
     }
 )
-
-
-
 
 # format date
 date_object = datetime.strptime(invoice_date, "%d-%b-%Y")
@@ -94,5 +93,5 @@ month_year = str(date_object.strftime("%B-%Y")).upper()
 
 # ex_data['sgst']=inv_amt*9,
 # ex_data['total']=inv_amt+cgst+sgst9
-ex_data.to_excel('/storage/emulated/0/Download/gst_file.xlsx',index=False,sheet_name=month_year)
+ex_data.to_excel('/storage/emulated/0/Download/gst_file.xlsx', index=False, sheet_name=month_year)
 print(ex_data)

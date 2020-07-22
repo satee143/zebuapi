@@ -1,17 +1,14 @@
-import time,os,datetime,math;
+import datetime;
 
 import pandas as pd
 
-
-#columns in data frame
+# columns in data frame
 df_cols = ["Timestamp", "Token", "LTP"]
 
-
-data_frame = pd.DataFrame(data=[],columns=df_cols, index=[])
+data_frame = pd.DataFrame(data=[], columns=df_cols, index=[])
 
 
 def on_ticks():
-
     global data_frame, df_cols
 
     data = dict()
@@ -22,14 +19,15 @@ def on_ticks():
     data[timestamp] = [timestamp, token, ltp]
     print(data)
     tick_df = pd.DataFrame(data.values(), columns=df_cols, index=data.keys())
-    #print(tick_df)
+    # print(tick_df)
     data_frame = data_frame.append(tick_df)
-    ggframe=data_frame.set_index(['Timestamp'],['Token'])
-    gticks=ggframe.loc[:,['LTP']]
+    ggframe = data_frame.set_index(['Timestamp'], ['Token'])
+    gticks = ggframe.loc[:, ['LTP']]
     print(gticks)
-    candles=gticks['LTP'].resample('1D').ohlc().dropna()
+    candles = gticks['LTP'].resample('1D').ohlc().dropna()
     print(candles)
-    
+
+
 on_ticks()
 '''
     

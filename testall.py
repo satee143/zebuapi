@@ -1,17 +1,16 @@
-import unittest 
-from selenium import webdriver 
+import unittest
 
-class AmazonHomePage(unittest. TestCase):
+from selenium import webdriver
 
-	def setUp(self):
 
-		self.driver = webdriver.Firefox(executable_path='mypath') 
-		self.driver.get('http://www.google.com')
+class AmazonHomePage(unittest.TestCase):
 
-	def test_load_home_page(self):
+    def setUp(self):
+        self.driver = webdriver.Firefox(executable_path='mypath')
+        self.driver.get('http://www.google.com')
 
-		self.get_title=self.driver.title
+    def test_load_home_page(self):
+        self.get_title = self.driver.title
 
-	def tearDown(self):
-
-		self.driver.close()
+    def tearDown(self):
+        self.driver.close()

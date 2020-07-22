@@ -1,8 +1,10 @@
 import csv
+from time import sleep
+
+from alice_blue import *
+
 import datetime
 from threading import Timer
-from time import sleep
-from alice_blue import *
 
 x = datetime.datetime.today()
 y = x.replace(day=x.day + 1, hour=22, minute=3, second=20, microsecond=0)
@@ -58,9 +60,11 @@ def abc():
     sleep(1)
     print(list)
 
+
 def calculate():
-  if list[2][5]>list[1][5] and list[2][4]>=list[1][4]:
-      print('Recommanded for sell ')
+    if list[2][5] > list[1][5] and list[2][4] >= list[1][4]:
+        print('Recommanded for sell ')
+
 
 t = Timer(secs, abc)
 t1 = Timer(secs1, abc)
@@ -71,5 +75,3 @@ t.start()
 t1.start()
 t2.start()
 t3.start()
-
-

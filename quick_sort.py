@@ -1,4 +1,3 @@
-
 def partition(lst, low, high):
     i = low - 1
     pivot = lst[high]

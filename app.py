@@ -2,8 +2,8 @@ from os import environ as env
 
 # 3rd party imports
 from chalice import Chalice, Response
-from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
+from twilio.rest import Client
 
 # Twilio Config
 ACCOUNT_SID = env.get('ACCOUNT_SID')
@@ -11,12 +11,11 @@ AUTH_TOKEN = env.get('AUTH_TOKEN')
 FROM_NUMBER = env.get('FROM_NUMBER')
 TO_NUMBER = env.get('TO_NUMBER')
 
-
 app = Chalice(app_name='sms-shooter')
-
 
 # Create a Twilio client using account_sid and auth token
 tw_client = Client(ACCOUNT_SID, AUTH_TOKEN)
+
 
 @app.route('/service/sms/send', methods=['POST'])
 def send_sms():

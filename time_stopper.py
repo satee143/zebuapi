@@ -1,5 +1,6 @@
-import threading, time, signal
-
+import signal
+import threading
+import time
 from datetime import timedelta
 
 WAIT_TIME_SECONDS = 1
