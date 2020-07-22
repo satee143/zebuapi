@@ -28,4 +28,4 @@ alice.start_websocket(subscribe_callback=event_handler_quote_update,
 while (socket_opened == False):
     pass
 alice.subscribe(alice.get_instrument_for_fno(symbol = 'BANKNIFTY', expiry_date=datetime.date(2020, 7, 30), is_fut=True, strike=None, is_CE = False), LiveFeedType.MARKET_DATA)
-sleep(1)
+sleep(99999)
