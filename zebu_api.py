@@ -206,5 +206,3 @@ def square_off_position(exchange, symbol, quantity, token):
 # print(place_regular_order())
 print(place_bracket_order('NFO', 'indus', 'bo', 'BUY', 'DAY', 1350, 'L', '50', 3, 4, 5))
 print(search_symbol('NFO', 'NIFTY23JUL2015200CE'))
-
-

@@ -1,8 +1,10 @@
 import csv
+from time import sleep
+
+from alice_blue import *
+
 import datetime
 from threading import Timer
-from time import sleep
-from alice_blue import *
 
 x = datetime.datetime.today()
 y = x.replace(day=x.day + 1, hour=9, minute=14, second=50, microsecond=0)
@@ -63,6 +65,7 @@ t2 = Timer(secs2, abc)
 t.start()
 t1.start()
 t2.start()
+
 
 def calculate():
     pass

@@ -1,9 +1,11 @@
 # import logging
-from time import sleep
 # logging.basicConfig(level=logging.DEBUG)
 import csv
-import datetime
+from time import sleep
+
 from alice_blue import *
+
+import datetime
 from threading import Timer
 
 x = datetime.datetime.today()
@@ -12,17 +14,18 @@ delta_t = y - x
 secs = delta_t.seconds + 1
 
 y1 = x.replace(day=x.day + 1, hour=21, minute=36, second=30, microsecond=0)
-delta_t1 = y1- x
+delta_t1 = y1 - x
 
 secs1 = delta_t1.seconds + 1
 list = []
+
+
 def abc():
     access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@9', twoFA='a',
                                                         api_secret='CW7LT01PAQRAVVUFQ0VH0PGXV1VJUG10RGWK3IAMIJGHJ1KCXYU1QBZWQJZ1FR53')
     alice = AliceBlue(username='AB102865', password='sampath@9', access_token=access_token,
                       master_contracts_to_download=['NFO'])
     socket_opened = True
-
 
     def event_handler_quote_update(message):
         f = csv.writer(open('abcd.csv', 'w', newline=''))

@@ -1,10 +1,11 @@
 # import logging
-from time import sleep
 # logging.basicConfig(level=logging.DEBUG)
 import csv
-import datetime
+from time import sleep
+
 from alice_blue import *
-from threading import Timer
+
+import datetime
 
 x = datetime.datetime.today()
 y = x.replace(day=x.day + 1, hour=0, minute=9, second=50, microsecond=0)
@@ -17,7 +18,7 @@ def abc():
     access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@9', twoFA='a',
                                                         api_secret='CW7LT01PAQRAVVUFQ0VH0PGXV1VJUG10RGWK3IAMIJGHJ1KCXYU1QBZWQJZ1FR53')
     alice = AliceBlue(username='AB102865', password='sampath@9', access_token=access_token,
-                      master_contracts_to_download=['NFO','NSE','BSE'])
+                      master_contracts_to_download=['NFO', 'NSE', 'BSE'])
     socket_opened = True
     list = []
 
@@ -44,12 +45,13 @@ def abc():
         pass
 
     alice.subscribe(alice.get_instrument_for_fno(symbol='BANKNIFTY', expiry_date=datetime.date(2020, 7, 30),
-                                                  is_fut=True, strike=None, is_CE=False), LiveFeedType.MARKET_DATA)
-    #alice.subscribe(alice.get_instrument_for_fno(symbol='NIFTY', expiry_date=datetime.date(2020, 7, 30), is_fut=True,strike=None, is_CE=False),LiveFeedType.MARKET_DATA)
+                                                 is_fut=True, strike=None, is_CE=False), LiveFeedType.MARKET_DATA)
+    # alice.subscribe(alice.get_instrument_for_fno(symbol='NIFTY', expiry_date=datetime.date(2020, 7, 30), is_fut=True,strike=None, is_CE=False),LiveFeedType.MARKET_DATA)
     # alice.subscribe(alice.get_instrument_for_fno(symbol = 'BANKNIFTY', expiry_date=datetime.date(2020, 6, 25), is_fut=True, strike=None, is_CE = False),LiveFeedType.MARKET_DATA)
     # alice.subscribe(alice.get_instrument_for_fno(symbol = 'BANKNIFTY', expiry_date=datetime.date(2020, 6, 25), is_fut=True, strike=None, is_CE = False),LiveFeedType.MARKET_DATA)
     sleep(1)
     print(list)
+
 
 abc()
 # t = Timer(secs, abc)

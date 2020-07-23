@@ -1,10 +1,11 @@
 # import logging
 # logging.basicConfig(level=logging.DEBUG)
 import csv
-import datetime
 from time import sleep
 
 from alice_blue import *
+
+import datetime
 
 
 def abc():
@@ -46,4 +47,6 @@ def abc():
     sleep(2)
     print(list)
     alice.place_order()
+
+
 abc()

@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 
-driver=webdriver.Chrome(executable_path='c:/drivers/chromedriver.exe')
+driver = webdriver.Chrome(executable_path='c:/drivers/chromedriver.exe')
 driver.get('https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json')

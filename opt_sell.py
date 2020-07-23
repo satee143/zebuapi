@@ -1,10 +1,12 @@
 import csv
-import datetime
 from time import sleep
 
 import requests
 from alice_blue import *
+
+import datetime
 from threading import Timer
+
 x = datetime.datetime.today()
 y = x.replace(day=x.day + 1, hour=0, minute=53, second=16, microsecond=0)
 delta_t = y - x
@@ -93,13 +95,12 @@ def abc():
     sleep(1)
     for x in list:
         if ((x[1] > x[3]) and (x[5] > x[3]) and (x[5] == x[1])):
-            print('1st cond',x[0], x[4])
+            print('1st cond', x[0], x[4])
         elif ((x[1] > x[3]) and (x[5] < x[3]) and (x[5] == x[1])):
-            print('2 cond',x[0], x[4])
+            print('2 cond', x[0], x[4])
         elif ((x[1] > x[3]) and (x[5] < x[3]) and (x[4] > x[1])):
-            print('3 cond',x[0], x[4])
+            print('3 cond', x[0], x[4])
         print(x)
-
 
 
 t = Timer(secs, abc)
