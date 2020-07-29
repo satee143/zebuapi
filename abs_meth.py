@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from absc import abstractmethod
 
 
 class Computer():
